@@ -4,9 +4,12 @@ class Bootloader extends Phaser.Scene {
     }
 
     preload() {
-
+        // Tiles Escenario
         this.load.tilemapTiledJSON('nivel-1', 'assets/map_one.json');
         this.load.image('tiles-1', 'assets/escenario.png');
+
+        // Player
+        this.load.image('player', '/assets/player_spritesheet.png')
 
         this.load.on('complete', () => {
             this.scene.start('Play');
