@@ -15,7 +15,7 @@ class Play extends Phaser.Scene {
         const layers = this.createLayers(map);
 
         // Const para llamar a la funcion que crea el player
-        const player = this.createPlayer();
+        const player = this.createPlayer().setScale(1.4);
 
         //Creamos una velocidad para el player
         this.playerSpeed = 200;
