@@ -10,17 +10,17 @@ const config = {
     type: Phaser.AUTO,
     scale: {
         parent: "phaser_container",
-        width: 640,
-        height: 360,
+        width: 800,
+        height: 380,
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH
     },
     pixelArt: true,
     physics: {
         default: "arcade",
-        "arcade": {
+        arcade: {
             gravity: {
-                y: 2000
+                y: 100
             }
         }
     },
