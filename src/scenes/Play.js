@@ -24,7 +24,12 @@ class Play extends Phaser.Scene {
         // Acá decimos que va a colisionar con qué
         this.physics.add.collider(player, layers.platformsColliders);
 
+        this.setupFollowupCameraOn(player);
+
+        this.physics.world.setBounds( 0, 0, 8000, 360);
     }
+
+    
 
     // Funcion para llamar el tilmap
     createMap () {
@@ -39,17 +44,21 @@ class Play extends Phaser.Scene {
         const tileset = map.getTileset('escenario')
         const platformsColliders = map.createStaticLayer('platforms_colliders', tileset);
         const platforms = map.createStaticLayer('platforms', tileset);
+        const wall = map.createStaticLayer('wall_colliders', tileset);
 
         platformsColliders.setCollisionByProperty({collides: true})
 
-        return{platforms, platformsColliders}
+        return{platforms, platformsColliders, wall}
     }
 
     // Funcion para crear al player
     createPlayer() {
-        return new Player(this, 150, 100);
+        return new Player(this, 400, 100);
     }
 
+    setupFollowupCameraOn(player) {
+        this.cameras.main.startFollow(player);
+    }
 }
 
 export default Play;
