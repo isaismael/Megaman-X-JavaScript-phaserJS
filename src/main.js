@@ -20,7 +20,7 @@ const config = {
         default: "arcade",
         arcade: {
             gravity: {
-                y: 100
+                y: 0
             }
         }
     },
@@ -28,7 +28,7 @@ const config = {
         Bootloader,
         UI,
         Play,
-        Menu
+        Menu,
     ]
 };
 

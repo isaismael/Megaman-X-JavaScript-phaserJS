@@ -1,4 +1,5 @@
 import Player from "../entities/Player.js";
+import EnemyFly from "../entities/EnemyFly.js";
 
 class Play extends Phaser.Scene {
     constructor() {
@@ -16,13 +17,16 @@ class Play extends Phaser.Scene {
 
         // Const para llamar a la funcion que crea el player
         const player = this.createPlayer().setScale(1.4);
+        const enemies = this.createEnemies(layers.enemySpawns);
 
+        
         //Creamos una velocidad para el player
         this.playerSpeed = 200;
 
         // Agregar las colisiones al player con los colisiones de las plataformas
         // Acá decimos que va a colisionar con qué
         this.physics.add.collider(player, layers.platformsColliders);
+        this.physics.add.collider(enemies, player)
 
         this.setupFollowupCameraOn(player);
 
@@ -48,15 +52,26 @@ class Play extends Phaser.Scene {
         const platforms = map.createStaticLayer('platforms', tileset);
         const wall = map.createStaticLayer('wall_colliders', tileset2);
         const wall2 = map.createStaticLayer('finalwall', tileset)
+        //Creamos enemigos
+        const enemySpawns = map.getObjectLayer('enemy_spawns')
 
         platformsColliders.setCollisionByProperty({collides: true})
 
-        return{platforms, platformsColliders, wall, wall2}
+        return{platforms, platformsColliders, wall, wall2, enemySpawns}
     }
 
     // Funcion para crear al player
     createPlayer() {
         return new Player(this, 400, 180);
+    }
+
+    createEnemies(spawLayers) {
+        
+        return spawLayers.objects.map(spawnPoint => {
+
+            return new EnemyFly(this, spawnPoint.x, spawnPoint.y).setScale(1.5);
+        })
+
     }
 
     setupFollowupCameraOn(player) {
