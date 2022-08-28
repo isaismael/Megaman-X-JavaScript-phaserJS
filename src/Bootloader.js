@@ -17,11 +17,12 @@ class Bootloader extends Phaser.Scene {
             frameHeight: 46
         })
 
-        this.load.spritesheet('enemyanims', '/assets/enemies/enemie_01.png', {
+        this.load.spritesheet('crusher', '/assets/enemies/crusher_spritesheet.png', {
             frameWidth: 45,
-            frameHeight: 45
+            frameHeight: 38
         })
 
+        
         this.load.on('complete', () => {
             this.scene.start('Play');
         });
