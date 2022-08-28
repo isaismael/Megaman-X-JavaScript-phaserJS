@@ -1,3 +1,5 @@
+import collidable from "../mixins/collidable.js";
+
 class Player extends Phaser.Physics.Arcade.Sprite {
 
   constructor(scene, x, y) {
@@ -5,6 +7,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     scene.add.existing(this);
     scene.physics.add.existing(this);
+
+    // Mixins
+    Object.assign(this, collidable);
 
     this.init();
     this.initEvenst();
@@ -18,6 +23,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     this.body.setGravityY(this.gravity);
     this.setCollideWorldBounds(true);
+
+    this.body.setSize(30,45)
+    this.body.setOffset(0)
 
     //Animaciones Player
     this.scene.anims.create({
@@ -82,6 +90,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.play('run', true) : this.play('idle', true) :
       this.play('jump', true)
   }
+
 }
 
 export default Player;
